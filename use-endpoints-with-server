@@ -1,0 +1,16 @@
+__author__ = 'robertking'
+
+import httplib2
+from apiclient.discovery import build
+
+http = httplib2.Http()
+
+service = build("helloworld", "v1", http=http,
+  discoveryServiceUrl=("http://localhost:8080/_ah/api/discovery/v1/apis/helloworld/v1/rest"))
+
+print service.greetings().listGreeting().execute()['items']
+
+"""
+prints
+[{u'message': u'hello world!'}, {u'message': u'goodbye world!'}]
+"""
